@@ -28,6 +28,9 @@ echo Tagged "${IMAGE_PUSH}"
 
 DOCKER_CONFIG="../.docker"
 if [[ -n ${PUSH} ]];then
+  if [[ -n ${DOCKER_USERNAME} && -n ${DOCKER_PASSWORD}]];then
+    docker login ${REPO} -u ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
+  fi
   docker --config=${DOCKER_CONFIG} push "${IMAGE_PUSH}"
   echo Pushed "${IMAGE_PUSH}"
 fi
